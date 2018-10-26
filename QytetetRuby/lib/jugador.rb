@@ -4,7 +4,7 @@
 # and open the template in the editor.
 module QytetetRuby
 class Jugador
-  attr_reader :cartaLibertad, :encarcelado, @nombre, :saldo, :propiedades, :casillaActual
+  attr_reader :cartaLibertad, :encarcelado, :nombre, :saldo, :propiedades, :casillaActual
   attr_writer :cartaLibertad, :casillaActual, :encarcelado
   def initialize(nombre_)
     @encarcelado=false
