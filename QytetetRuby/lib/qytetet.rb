@@ -79,7 +79,36 @@ class Qytetet
   def mover(casillaDestino_)
     raise NotImplementedError
   end
-   
+  def obtenerCasillaJugadorActual
+    raise NotImplementedError
+  end
+  def obtenerCasillasTablero
+    raise NotImplementedError
+  end
+  def obtenerPropiedadesJugadores
+    raise NotImplementedError
+  end
+  def obtenerPropiedadesJugadorSegunEstadoHipoteca(estadoHipoteca)
+    raise NotImplementedError
+  end
+  def obtenerRanking
+    raise NotImplementedError
+  end
+  def obtenerSaldoJugadorActual
+    raise NotImplementedError
+  end
+  def salidaJugador
+    raise NotImplementedError
+  end
+  def siguienteJugador
+    raise NotImplementedError
+  end
+  def tirarDado
+    raise NotImplementedError
+  end
+  def venderPropiedad(casilla)
+    raise NotImplementedError
+  end
   
   
   
