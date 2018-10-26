@@ -4,22 +4,23 @@
 # To change this template file, choose Tools | Templates
 # and open the template in the editor.
 require "singleton"
+require_relative 'jugador.rb'
 module QytetetRuby
 class Qytetet
   include Singleton
-  attr_reader :mazo
+  attr_reader :mazo, :jugadores
   @@MAX_JUGADORES = 4
   @@NUM_SORPRESAS = 10
   @@NUM_CASILLAS = 20
   @@PRECIO_LIBERTAD = 200
   @@SALDO_SALIDA = 1000
-  def initialize(mazo_,dado_,tablero_,jugadorActual_,numeroJugadores_,cartaActual_)
-    @mazo=mazo_
-    @dado=dado_
-    @tablero=tablero_
-    @jugadorActual=jugadorActual_
-    @numeroJugadores=numeroJugadores_
-    @cartaActual=cartaActual_
+  def initialize
+    @mazo
+    @dado
+    @tablero
+    @jugadorActual
+    @jugadores
+    @cartaActual
   end
   def inicializarCartasSorpresa
     @mazo = Array.new
@@ -65,10 +66,23 @@ class Qytetet
     raise NotImplementedError
   end
   def inicializarJuego(nombres_)
-    raise NotImplementedError
+    inicializarTablero
+    inicializarCartasSorpresa
+    inicializarJugadores(nombres_)
   end
   def inicializarJugadores(nombres_)
-    raise NotImplementedError
+    if (nombres_.length < 2 || nombres_.length > @@MAX_JUGADORES)
+        raise ArgumentError, "Número incorrecto de jugadores."
+      end
+      
+      @jugadores = Array.new
+      
+      for jugador in nombres_
+        @jugadores << Jugador.new(jugador)
+      end
+  end
+  def inicializarTablero
+    @tablero=Tablero.new
   end
   def intentarSalirCarcel(metodo_)
     raise NotImplementedError
