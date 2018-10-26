@@ -11,11 +11,15 @@ require_relative 'tipo_casilla'
 require_relative 'tablero'
 module QytetetRuby
   class PruebaQytetet
-    @@juego = Qytetet.new
+    @@juego = Qytetet.instance
     @@titulo = TituloPropiedad.new("Juan",10,25,15,12,15)
     @@casilla = Casilla.noTipoCalle(2,250 ,TipoCasilla::CARCEL)
     @@casilla1 = Casilla.tipoCalle(6, TipoCasilla::CALLE, TituloPropiedad.new("nombre_",25,125,225,335,445))
     @@tablero = Tablero.new
+  
+    
+    
+    
     def PruebaQytetet.mayorquecero
       ex = Array.new
        @@juego.mazo.each do |i| 
@@ -27,11 +31,19 @@ module QytetetRuby
       return ex
     end
     def PruebaQytetet.main
+        @nombresjug= Array.new
+    @nombresjug <<  "juan"
+    @nombresjug <<  "tania"
+    @@juego.inicializarJuego(@nombresjug)
+    
+
+    @@juego.inicializarCartasSorpresa
+    
+    @@juego.jugadores.each do |j|
       
-      @@juego.inicializarCartasSorpresa
-     
-      
-      puts @@tablero
+        puts j.nombre
+    end
+      #puts @@tablero
       #puts mayorquecero()
 #     puts @@titulo.to_s
 #     puts @@casilla.to_s
