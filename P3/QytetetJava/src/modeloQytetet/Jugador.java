@@ -16,7 +16,7 @@ public class Jugador implements Comparable{
     private String nombre;
     private int saldo = 7500;
     private ArrayList<TituloPropiedad> propiedades=new ArrayList<>();
-    private ArrayList<Sorpresa> cartaLibertad = new ArrayList<>();
+    private Sorpresa cartaLibertad;
     private ArrayList<Casilla> casillaActual;
     
     @Override
@@ -29,7 +29,7 @@ public class Jugador implements Comparable{
     Jugador(String name){
         this.nombre=name;
         this.saldo=7500;
-        this.cartaLibertad = new ArrayList<>();
+        this.cartaLibertad = null;
         this.propiedades=new ArrayList<>();
         //this.casillaActual=casillaActual.getNumeroCasilla();
     }
@@ -50,7 +50,7 @@ public class Jugador implements Comparable{
         return propiedades;
     }
 
-    public ArrayList<Sorpresa> getCartaLibertad() {
+    public Sorpresa getCartaLibertad() {
         return cartaLibertad;
     }
 
@@ -62,7 +62,7 @@ public class Jugador implements Comparable{
         this.encarcelado = encarcelado;
     }
 
-    public void setCartaLibertad(ArrayList<Sorpresa> cartaLibertad) {
+    public void setCartaLibertad(Sorpresa cartaLibertad) {
         this.cartaLibertad = cartaLibertad;
     }
 
@@ -77,10 +77,17 @@ public class Jugador implements Comparable{
         throw new UnsupportedOperationException("Sin implementar");
     }
     int cuantasCasasHotelesTengo(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int casas=0, hoteles=0;
+        for (TituloPropiedad propiedad : propiedades){
+            casas=casas+propiedad.getNumCasas();
+            hoteles=hoteles+propiedad.getNumHoteles();
+        }
+        return casas+ hoteles;
     }
     Sorpresa devolverCartaLibertad(){
-        throw new UnsupportedOperationException("Sin implementar");
+        Sorpresa carta = this.cartaLibertad;
+        this.cartaLibertad=null;
+        return carta;
     }
     boolean edificarCasa(TituloPropiedad titulo){
         throw new UnsupportedOperationException("Sin implementar");
@@ -103,7 +110,15 @@ public class Jugador implements Comparable{
         throw new UnsupportedOperationException("Sin implementar");
     }
     int obtenerCapital(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int capital=this.saldo;
+        int valorPropiedades=0;
+        for(TituloPropiedad propiedad : propiedades){
+            if(!propiedad.isHipotecado())
+                valorPropiedades= valorPropiedades + propiedad.getPrecioCompra() + (propiedad.getNumHoteles() + propiedad.getNumCasas()) *propiedad.getPrecioEdificar();
+            else
+                valorPropiedades= valorPropiedades + propiedad.getPrecioCompra() + (propiedad.getNumHoteles() + propiedad.getNumCasas()) *propiedad.getPrecioEdificar() - propiedad.getHipotecaBase();
+         }
+        return capital + valorPropiedades;
     }
     ArrayList<TituloPropiedad> obtenerPropiedades(boolean hipotecada){
         throw new UnsupportedOperationException("Sin implementar");

@@ -12,7 +12,7 @@ class Jugador
     @saldo=7500
     @propiedades=nil
     @casillaActual=0
-    @cartaLibertad=0
+    @cartaLibertad=nil
   end
   def <=>
     otroJugador.obtenerCapital <=> obtenerCapital
@@ -24,13 +24,19 @@ class Jugador
     raise NotImplementedError
   end
   def cuantasCasasHotelesTengo
-    raise NotImplementedError
+    propiedades.each do  |propiedad|
+      casas=casas + propiedad.numCasas
+      hoteles = hoteles + propiedad.numHoteles
+    end  
+    return casas+hoteles
   end
   def deboPagarAlquiler
     raise NotImplementedError
   end
   def devolverCartaLibertad
-    raise NotImplementedError
+    carta = @cartaLibertad
+    @cartaLibertad=nil
+    return carta
   end
   def edificarCasa(titulo_)
     raise NotImplementedError
@@ -57,7 +63,14 @@ class Jugador
     raise NotImplementedError
   end
   def obtenerCapital
-    raise NotImplementedError
+    @propiedades.each do |propiedad|
+      if(!propiedad.hipotecada)
+        valorPropiedades= valorPropiedades+ (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar
+      else
+        valorPropiedades= valorPropiedades+ (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar - propiedad.hipotecaBase
+      end
+    end
+    return @saldo + valorPropiedades
   end
   def obtenerPropiedades(hipotecada_)
     raise NotImplementedError
