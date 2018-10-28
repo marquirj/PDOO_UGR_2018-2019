@@ -11,7 +11,7 @@ class Jugador
     @nombre=nombre_
     @saldo=7500
     @propiedades=nil
-    @casillaActual=0
+    @casillaActual=nil
     @cartaLibertad=nil
   end
   def <=>
@@ -48,7 +48,12 @@ class Jugador
     raise NotImplementedError
   end
   def esDeMiPropiedad(titulo_)
-    raise NotImplementedError
+    @@propiedades.each do |propiedad|
+      if(propiedad.nombre == titulo.nombre)
+        return true
+      end
+    end
+    return false
   end
   def estoyEnCalleLibre()
     raise NotImplementedError
@@ -60,8 +65,9 @@ class Jugador
     raise NotImplementedError
   end
   def modificarSaldo(cantidad_)
-    raise NotImplementedError
-  end
+    @saldo = @saldo + cantidad
+    return @saldo
+  end 
   def obtenerCapital
     @propiedades.each do |propiedad|
       if(!propiedad.hipotecada)
@@ -73,22 +79,32 @@ class Jugador
     return @saldo + valorPropiedades
   end
   def obtenerPropiedades(hipotecada_)
-    raise NotImplementedError
+    aux=Array.new
+    @propiedades.each do |propiedad|
+      if(propiedad.hipotecada==hipotecada_)
+        aux<<propiedad
+      end
+    end
+    return aux
   end
   def pagarAlquiler
     raise NotImplementedError
   end
   def pagarImpuesto
-    raise NotImplementedError
+    @saldo = @saldo - @casilla.coste
   end
   def pagarLibertad(cantidad_)
     raise NotImplementedError
   end
   def tengoCartaLibertad
-    raise NotImplementedError
+    if @cartaLibertad !=nil
+      return true
+    else
+      return false
+    end
   end
   def tengoSaldo(cantidad_)
-    raise NotImplementedError
+    return @saldo > cantidad_
   end
   def venderPropiedad(casilla_)
     raise NotImplementedError
@@ -97,6 +113,7 @@ class Jugador
     "Encarcelado: #{@encarcelado}\n
     Nombre: #{@nombre}\n
     Saldo: #{@saldo}\n
+    Capital: #{obtenerCapital}\n
     Propiedades#{@propiedades}\n
     Casilla Actual: #{@casillaActual}\n
     Carta Libertad: #{@cartaLibertad}"

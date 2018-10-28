@@ -17,7 +17,7 @@ public class Jugador implements Comparable{
     private int saldo = 7500;
     private ArrayList<TituloPropiedad> propiedades=new ArrayList<>();
     private Sorpresa cartaLibertad;
-    private ArrayList<Casilla> casillaActual;
+    private Casilla casillaActual;
     
     @Override
      public int compareTo(Object otroJugador){
@@ -54,7 +54,7 @@ public class Jugador implements Comparable{
         return cartaLibertad;
     }
 
-    public ArrayList<Casilla> getCasillaActual() {
+    public Casilla getCasillaActual() {
         return casillaActual;
     }
 
@@ -66,7 +66,7 @@ public class Jugador implements Comparable{
         this.cartaLibertad = cartaLibertad;
     }
 
-    public void setCasillaActual(ArrayList<Casilla> casillaActual) {
+    public void setCasillaActual(Casilla casillaActual) {
         this.casillaActual = casillaActual;
     }
     
@@ -96,18 +96,28 @@ public class Jugador implements Comparable{
         throw new UnsupportedOperationException("Sin implementar");
     }
     void eliminarDeMisPropiedades(TituloPropiedad titulo){}
+    
     boolean esDeMiPropiedad(TituloPropiedad titulo){
-        throw new UnsupportedOperationException("Sin implementar");
+        for(TituloPropiedad propiedad : propiedades){
+            if(titulo.getNombre()== propiedad.getNombre()){
+                return true;
+            }
+        }
+        return false;
     }
+    
     boolean estoyEnCalleLibre(){
         throw new UnsupportedOperationException("Sin implementar");
     }
     boolean hipotecarPropiedad(TituloPropiedad tiutlo){
         throw new UnsupportedOperationException("Sin implementar");
     }
-    void irALaCarcel(Casilla casilla){}
+    void irALaCarcel(Casilla casilla){
+    
+    }
     int modificarSaldo(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        this.saldo = this.saldo + cantidad;
+        return this.saldo;
     }
     int obtenerCapital(){
         int capital=this.saldo;
@@ -121,16 +131,28 @@ public class Jugador implements Comparable{
         return capital + valorPropiedades;
     }
     ArrayList<TituloPropiedad> obtenerPropiedades(boolean hipotecada){
-        throw new UnsupportedOperationException("Sin implementar");
+        ArrayList<TituloPropiedad> aux = new ArrayList<>();
+        for(TituloPropiedad propiedad :propiedades){
+            if(propiedad.isHipotecado() == hipotecada){
+                aux.add(propiedad);
+            }
+            
+        }
+        return aux;
     }
     void pagarAlquiler(){}
-    void pagarImpuesto(){}
+    void pagarImpuesto(){
+        this.saldo = this.saldo - this.casillaActual.getCoste();
+    }
     void pagarLibertad(int cantidad){}
     boolean tengoCartaLibertad(){
-        throw new UnsupportedOperationException("Sin implementar");
+        if(this.cartaLibertad!=null){
+            return true;
+        }else
+            return false;
     }
     boolean tengoSaldo(int cantidad){
-        throw new UnsupportedOperationException("Sin implementar");
+        return this.saldo > cantidad;
     }
     boolean venderPropiedad(Casilla casilla){
         throw new UnsupportedOperationException("Sin implementar");
@@ -138,7 +160,7 @@ public class Jugador implements Comparable{
 
     @Override
     public String toString() {
-        return "Jugador{" + "encarcelado=" + encarcelado + ", nombre=" + nombre + ", saldo=" + saldo + ", propiedades=" + propiedades + ", cartaLibertad=" + cartaLibertad + ", casillaActual=" + casillaActual + '}';
+        return "Jugador{" + "encarcelado=" + encarcelado + ", nombre=" + nombre + ", saldo=" + saldo + ", capital= "+obtenerCapital() + ", propiedades=" + propiedades + ", cartaLibertad=" + cartaLibertad + ", casillaActual=" + casillaActual + '}';
     }
     
     
