@@ -10,7 +10,7 @@ class Sorpresa
     @texto=texto_
     @tipo=tipo_
     @valor=valor_
-   # nuevo(texto_,valor_,tipo_)
+   
   end
   def self.nuevo(texto_,valor_,tipo_)
     new(texto_,valor_,tipo_)

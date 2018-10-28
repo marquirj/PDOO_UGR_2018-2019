@@ -10,7 +10,7 @@ class Jugador
     @encarcelado=false
     @nombre=nombre_
     @saldo=7500
-    @propiedades=nil
+    @propiedades=Array.new
     @casillaActual=nil
     @cartaLibertad=nil
   end
@@ -24,11 +24,12 @@ class Jugador
     raise NotImplementedError
   end
   def cuantasCasasHotelesTengo
-    propiedades.each do  |propiedad|
-      casas=casas + propiedad.numCasas
+    casas = hoteles = 0
+    @propiedades.each do  |propiedad|
+      casas = casas + propiedad.numCasas
       hoteles = hoteles + propiedad.numHoteles
     end  
-    return casas+hoteles
+    return casas + hoteles
   end
   def deboPagarAlquiler
     raise NotImplementedError

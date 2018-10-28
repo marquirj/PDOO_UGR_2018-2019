@@ -6,23 +6,23 @@ module QytetetRuby
 class Tablero
   attr_reader :carcel, :casillas
   def initialize
-    @casillas
+    @casillas= Array.new
     @carcel
     inicializar
   end
-  def esCasillaCarcel(numeroCasilla)
-    return (numeroCasilla=9)
+  def esCasillaCarcel(numeroCasilla_)
+    return (numeroCasilla_==9)
   end
   def obtenerCasillaFinal(casilla_, desplazamiento_)
     aux = (casilla_.numeroCasilla + desplazamiento_)%20
-    return casillas.get(aux)
+    return @casillas[aux]
   end
-  def obtenerCasillaNumero(numeroCasilla)
-    casillas.get(numeroCasilla)
+  def obtenerCasillaNumero(numeroCasilla_)
+    return @casillas[numeroCasilla_]
   end
   private
   def inicializar
-    @casillas= Array.new
+    
     @casillas<< (Casilla.noTipoCalle(0,2500,TipoCasilla::SALIDA))
     @casillas<< Casilla.tipoCalle(1,TipoCasilla::CALLE, TituloPropiedad.new("Calle Tunel",1000,100,0.20,900,600))
     @casillas<<Casilla.tipoCalle(2,TipoCasilla::CALLE, TituloPropiedad.new("Calle Primer Centenario",975,95,0.19,875,750))

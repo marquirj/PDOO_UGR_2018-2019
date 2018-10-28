@@ -8,7 +8,7 @@ require_relative 'jugador.rb'
 module QytetetRuby
 class Qytetet
   include Singleton
-  attr_accesor :estadoJuego, :cartaActual
+  attr_accessor :estadoJuego, :cartaActual
   attr_reader :mazo, :jugadores
   @@MAX_JUGADORES = 4
   @@NUM_SORPRESAS = 10
@@ -20,7 +20,7 @@ class Qytetet
     @dado
     @tablero
     @jugadorActual
-    @jugadores
+    @jugadores= Array.new
     @cartaActual
     @estadoJuego
   end

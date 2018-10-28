@@ -51,6 +51,7 @@ public class PruebaQytetet {
        //System.out.println(ayuda);
        System.out.println(juego.getTablero().toString());
        
+       
         getNombreJugadores();
        
     }
