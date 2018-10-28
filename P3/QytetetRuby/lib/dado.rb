@@ -12,7 +12,8 @@ class Dado
     @valor = valor_
   end
   def tirar
-    raise NotImplementedError
+    @valor=rand(1..6)
+    return @valor
   end
   def to_s
     "Dado #{@dado}\n"

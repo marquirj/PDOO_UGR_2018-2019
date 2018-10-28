@@ -16,7 +16,7 @@ class TituloPropiedad
    @precioEdificar=precioEdificar_
    @numCasas=5
    @numHoteles=6
-   @propietario
+   @propietario=nil
   end
   def calcularCosteCancelar
     raise NotImplementedError
@@ -49,10 +49,10 @@ class TituloPropiedad
     raise NotImplementedError
   end
   def propietarioEncarcelado
-    raise NotImplementedError
+    return @propietario.encarcelado
   end
   def tengoPropietario
-    raise NotImplementedError
+    return @propietario!=nil
   end
 
   def to_s

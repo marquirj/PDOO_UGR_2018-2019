@@ -28,13 +28,13 @@ class Casilla
     raise NotImplementedError
   end
   def propietarioEncarcelado
-    raise NotImplementedError
+    return @titulo.propietarioEncarcelado
   end
   def soyEdificable
-    raise NotImplementedError
+    return (@tipo == TipoCasilla::CALLE)
   end
   def tengoPropietario
-    raise NotImplementedError
+    return @titulo.tengoPropietario
   end
   
   
