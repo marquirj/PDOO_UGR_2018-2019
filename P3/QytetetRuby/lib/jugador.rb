@@ -49,8 +49,8 @@ class Jugador
     raise NotImplementedError
   end
   def esDeMiPropiedad(titulo_)
-    @@propiedades.each do |propiedad|
-      if(propiedad.nombre == titulo.nombre)
+    @propiedades.each do |propiedad|
+      if(propiedad.nombre == titulo_.nombre)
         return true
       end
     end
@@ -66,10 +66,11 @@ class Jugador
     raise NotImplementedError
   end
   def modificarSaldo(cantidad_)
-    @saldo = @saldo + cantidad
+    @saldo = @saldo + cantidad_
     return @saldo
   end 
   def obtenerCapital
+    valorPropiedades=0
     @propiedades.each do |propiedad|
       if(!propiedad.hipotecada)
         valorPropiedades= valorPropiedades+propiedad.precioCompra + (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar
@@ -92,7 +93,7 @@ class Jugador
     raise NotImplementedError
   end
   def pagarImpuesto
-    @saldo = @saldo - @casilla.coste
+    @saldo = @saldo - @casillaActual.coste
   end
   def pagarLibertad(cantidad_)
     raise NotImplementedError
@@ -111,11 +112,11 @@ class Jugador
     raise NotImplementedError
   end
   def to_s
-    "Encarcelado: #{@encarcelado}\n
+    " Encarcelado: #{@encarcelado}\n
     Nombre: #{@nombre}\n
     Saldo: #{@saldo}\n
     Capital: #{obtenerCapital}\n
-    Propiedades#{@propiedades}\n
+    Propiedades#{@propiedades.join}\n
     Casilla Actual: #{@casillaActual}\n
     Carta Libertad: #{@cartaLibertad}"
   end

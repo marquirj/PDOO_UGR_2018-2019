@@ -14,8 +14,8 @@ class TituloPropiedad
    @factorRevalorizacion=factorRevalorizacion_
    @hipotecaBase=hipotecaBase_
    @precioEdificar=precioEdificar_
-   @numCasas=0
-   @numHoteles=0
+   @numCasas=5
+   @numHoteles=6
    @propietario
   end
   def calcularCosteCancelar
