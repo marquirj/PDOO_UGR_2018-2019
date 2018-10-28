@@ -55,12 +55,15 @@ public class Tablero {
         carcel = casillas.get(9);
     }
     Casilla obtenerCasillaFinal(Casilla casilla, int desplazamiento){
-        throw new UnsupportedOperationException("Sin implementar");
+        int aux;
+         aux = casilla.getNumeroCasilla() + desplazamiento;
+         return casillas.get(aux);
     }
     Casilla obtenerCasillaNumero(int numeroCasilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        return casillas.get(numeroCasilla);
     }
    boolean esCasillaCarcel(int numeroCasilla){
-        throw new UnsupportedOperationException("Sin implementar");
+        return (9==numeroCasilla);
    }
+   
 }
