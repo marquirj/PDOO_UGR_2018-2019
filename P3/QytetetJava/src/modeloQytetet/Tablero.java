@@ -56,7 +56,7 @@ public class Tablero {
     }
     Casilla obtenerCasillaFinal(Casilla casilla, int desplazamiento){
         int aux;
-         aux = casilla.getNumeroCasilla() + desplazamiento;
+         aux = (casilla.getNumeroCasilla() + desplazamiento)%20;
          return casillas.get(aux);
     }
     Casilla obtenerCasillaNumero(int numeroCasilla){

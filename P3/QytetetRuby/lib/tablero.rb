@@ -14,7 +14,7 @@ class Tablero
     return (numeroCasilla=9)
   end
   def obtenerCasillaFinal(casilla_, desplazamiento_)
-    aux = casilla_.numeroCasilla + desplazamiento_
+    aux = (casilla_.numeroCasilla + desplazamiento_)%20
     return casillas.get(aux)
   end
   def obtenerCasillaNumero(numeroCasilla)
