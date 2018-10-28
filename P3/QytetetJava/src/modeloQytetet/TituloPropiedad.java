@@ -98,7 +98,7 @@ public class TituloPropiedad {
         throw new UnsupportedOperationException("Sin implementar");
     }
     boolean propietarioEncarcelado(){
-        this.propietario.isEncarcelado();
+        return this.propietario.isEncarcelado();
     }
     void setHipotecada(boolean hipotecada){}
 
