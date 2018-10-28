@@ -10,14 +10,15 @@ class Tablero
     @carcel
     inicializar
   end
-  def esCasillaCarcel
-    raise NotImplementedError
+  def esCasillaCarcel(numeroCasilla)
+    return (numeroCasilla=9)
   end
   def obtenerCasillaFinal(casilla_, desplazamiento_)
-    raise NotImplementedError
+    aux = casilla_.numeroCasilla + desplazamiento_
+    return casillas.get(aux)
   end
   def obtenerCasillaNumero(numeroCasilla)
-    raise NotImplementedError
+    casillas.get(numeroCasilla)
   end
   private
   def inicializar
