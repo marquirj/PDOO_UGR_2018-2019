@@ -13,7 +13,7 @@ public class Dado {
     private static final Dado instance = new Dado();
     private int valor;
     int tirar(){
-        return 21;
+         return this.valor = (int) Math.floor(Math.random()*6+1);
      }
     int getValor(){
         return this.valor;

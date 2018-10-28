@@ -50,13 +50,13 @@ public class Casilla {
         throw new UnsupportedOperationException("Sin implementar");
     }
     boolean propietarioEncarcelado(){
-        throw new UnsupportedOperationException("Sin implementar");
+        return this.titulo.propietarioEncarcelado();
     }
     boolean soyEdificable(){
-        throw new UnsupportedOperationException("Sin implementar");
+        return this.tipo == tipo.CALLE;
     }
     boolean tengoPropietario(){
-        throw new UnsupportedOperationException("Sin implementar");
+        return this.titulo.tengoPropietario();
     }
     TituloPropiedad asignarPropietario(Jugador jugador){
         throw new UnsupportedOperationException("Sin implementar");
