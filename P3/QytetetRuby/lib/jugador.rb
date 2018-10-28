@@ -14,6 +14,9 @@ class Jugador
     @casillaActual=0
     @cartaLibertad=0
   end
+  def <=>
+    otroJugador.obtenerCapital <=> obtenerCapital
+  end
   def cancelarHipoteca(titulo_)
     raise NotImplementedError
   end

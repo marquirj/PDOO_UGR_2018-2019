@@ -11,13 +11,20 @@ import java.util.ArrayList;
  *
  * @author marquirj
  */
-public class Jugador {
+public class Jugador implements Comparable{
     private boolean encarcelado=false;
     private String nombre;
     private int saldo = 7500;
     private ArrayList<TituloPropiedad> propiedades=new ArrayList<>();
     private ArrayList<Sorpresa> cartaLibertad = new ArrayList<>();
     private ArrayList<Casilla> casillaActual;
+    
+    @Override
+     public int compareTo(Object otroJugador){
+         int otroCapital = ((Jugador) otroJugador).obtenerCapital();
+         return otroCapital - obtenerCapital();
+                
+     }
     
     Jugador(String name){
         this.nombre=name;
