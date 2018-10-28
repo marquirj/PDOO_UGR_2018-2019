@@ -65,9 +65,9 @@ class Jugador
   def obtenerCapital
     @propiedades.each do |propiedad|
       if(!propiedad.hipotecada)
-        valorPropiedades= valorPropiedades+ (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar
+        valorPropiedades= valorPropiedades+propiedad.precioCompra + (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar
       else
-        valorPropiedades= valorPropiedades+ (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar - propiedad.hipotecaBase
+        valorPropiedades= valorPropiedades+ propiedad.precioCompra + (propiedad.numCasas+propiedad.numHoteles)*propiedad.precioEdificar - propiedad.hipotecaBase
       end
     end
     return @saldo + valorPropiedades
