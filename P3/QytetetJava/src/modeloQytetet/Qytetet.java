@@ -22,8 +22,18 @@ public class Qytetet {
     public int SALDO_SALIDA = 1000;
     private Sorpresa cartaActual;
     private Dado dado;
+    private EstadoJuego estadoJuego;
+    private MetodoSalirCarcel metodoSalirCarcel;
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private Qytetet(){}
+
+    public void setEstadoJuego(EstadoJuego estadoJuego) {
+        this.estadoJuego = estadoJuego;
+    }
+
+    public EstadoJuego getEstadoJuego() {
+        return estadoJuego;
+    }
     
     public Tablero getTablero(){
         return this.tablero;
