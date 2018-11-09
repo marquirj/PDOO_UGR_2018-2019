@@ -34,7 +34,7 @@ public class Jugador implements Comparable{
         //this.casillaActual=casillaActual.getNumeroCasilla();
     }
 
-    public boolean isEncarcelado() {
+    public boolean getEncarcelado() {
         return encarcelado;
     }
 
@@ -134,8 +134,9 @@ public class Jugador implements Comparable{
     boolean hipotecarPropiedad(TituloPropiedad tiutlo){
         throw new UnsupportedOperationException("Sin implementar");
     }
-    void irALaCarcel(Casilla casilla){
-    
+    void irACarcel(Casilla casilla){
+        setCasillaActual(casilla);
+         setEncarcelado(true);
     }
     int modificarSaldo(int cantidad){
         this.saldo = this.saldo + cantidad;

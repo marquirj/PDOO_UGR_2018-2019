@@ -178,7 +178,17 @@ public class Qytetet {
     public boolean edificarHotel(int numCasilla){
          throw new UnsupportedOperationException("Sin implementar");
     }
-    public void encarcelarJugador(){}
+    public void encarcelarJugador(){
+        if(!jugadorActual.tengoCartaLibertad()){
+            Casilla casillaCarcel = tablero.getCarcel();
+            jugadorActual.irACarcel(casillaCarcel);
+             setEstadoJuego(EstadoJuego.JA_ENCARCELADO);
+        }else{
+            Sorpresa carta = jugadorActual.devolverCartaLibertad();
+            mazo.add(carta);
+             setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+        }
+    }
     public int getValorDado(){
          throw new UnsupportedOperationException("Sin implementar");
     }
@@ -194,7 +204,22 @@ public class Qytetet {
         }
     }
     public boolean intentarSalirCarcel(MetodoSalirCarcel metodo){
-         throw new UnsupportedOperationException("Sin implementar");
+        if(metodo == MetodoSalirCarcel.TIRANDODADO){
+            int resultado = tirarDado();
+            if(resultado>=5){
+                jugadorActual.setEncarcelado(false); 
+            }
+        }else if(metodo == MetodoSalirCarcel.PAGANDOLIBERTAD){
+            jugadorActual.pagarLibertad(PRECIO_LIBERTAD);
+            
+        }
+        boolean encarcelado=jugadorActual.getEncarcelado();
+        if(encarcelado){
+            setEstadoJuego(EstadoJuego.JA_ENCARCELADO);
+        }else{
+            setEstadoJuego(EstadoJuego.JA_PREPARADO);
+        }
+        return encarcelado;
     }
     public void jugar(){}
     public void mover(int numCasillaDestino){}
