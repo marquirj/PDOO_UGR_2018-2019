@@ -84,6 +84,10 @@ public class Jugador implements Comparable{
         }
         return casas+ hoteles;
     }
+    boolean deboPagarAlquiler(){
+        throw new UnsupportedOperationException("Sin implementar");
+    }
+    
     Sorpresa devolverCartaLibertad(){
         Sorpresa carta = this.cartaLibertad;
         this.cartaLibertad=null;

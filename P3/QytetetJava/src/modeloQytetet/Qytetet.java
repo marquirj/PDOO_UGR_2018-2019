@@ -81,14 +81,85 @@ public class Qytetet {
     public static Qytetet getInstance() {
         return instance;
     }
-    public void actuarSiEnCasillaEdificable(){}
-    public void actuarSiEnCasillaNoEdificable(){}
-    public void aplicarSorpresa(){}
+    public void actuarSiEnCasillaEdificable(){
+        boolean deboPagar=jugadorActual.deboPagarAlquiler();
+        if(deboPagar){
+            jugadorActual.pagarAlquiler();
+        }
+        Casilla casilla=obtenerCasillaJugadorActual();
+        boolean tengoPropietario=casilla.tengoPropietario();
+        if(tengoPropietario){
+            setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+        }else{
+        }
+    }
+    public void actuarSiEnCasillaNoEdificable(){
+        setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+        Casilla casillaActual=jugadorActual.getCasillaActual();
+        if(casillaActual.getTipo()==TipoCasilla.IMPUESTO){
+            jugadorActual.pagarImpuesto();
+        }else{
+            if(casillaActual.getTipo()==TipoCasilla.JUEZ){
+              encarcelarJugador();  
+            }else if(casillaActual.getTipo()==TipoCasilla.SORPRESA){
+                //cartaActual=remove(0);
+                setEstadoJuego(EstadoJuego.JA_CONSORPRESA);
+            }
+        }
+        
+        
+}
+    public void aplicarSorpresa(){
+        setEstadoJuego(EstadoJuego.PUEDOGESTIONAR);
+        if(cartaActual.getTipo()==TipoSorpresa.SALIRCARCEL){
+            jugadorActual.setCartaLibertad(cartaActual);
+        }else{
+            mazo.add(cartaActual);
+            if(cartaActual.getTipo() == TipoSorpresa.PAGARCOBRAR){
+                jugadorActual.modificarSaldo(cartaActual.getValor());
+                if(jugadorActual.getSaldo()<0){
+                     setEstadoJuego(EstadoJuego.ALGUNJUGADORENBANCARROTA);
+                }
+            }else if(cartaActual.getTipo() ==TipoSorpresa.IRACASILLA){
+                int valor=cartaActual.getValor();
+                boolean casillaCarcel=tablero.esCasillaCarcel(valor);
+                if(casillaCarcel==true){
+                    encarcelarJugador();
+                    
+                }else{
+                    mover(valor);
+                }
+            }else if(cartaActual.getTipo() == TipoSorpresa.PORCASAHOTEL){
+                int cantidad = cartaActual.getValor();
+                int numeroTotal = jugadorActual.cuantasCasasHotelesTengo();
+                jugadorActual.modificarSaldo((cantidad*numeroTotal));
+                if(jugadorActual.getSaldo()<0){
+                     setEstadoJuego(EstadoJuego.ALGUNJUGADORENBANCARROTA);
+                }
+                
+            }else if(cartaActual.getTipo() == TipoSorpresa.PORJUGADOR){
+                for(Jugador jugador : jugadores){
+                    if(jugador!=jugadorActual){
+                        jugador.modificarSaldo(cartaActual.getValor());
+                    }else if(jugador.getSaldo()<0){
+                         setEstadoJuego(EstadoJuego.ALGUNJUGADORENBANCARROTA);
+                    }else if(jugadorActual.getSaldo()<0){
+                         setEstadoJuego(EstadoJuego.ALGUNJUGADORENBANCARROTA);
+                    }
+                
+                }
+            }
+            
+        }
+        
+        
+        
+    }
     public boolean cancelarHipoteca(int numCasilla){
          throw new UnsupportedOperationException("Sin implementar");
     }
     public boolean comprarTituloPropiedad(){
-         throw new UnsupportedOperationException("Sin implementar");
+         
     }
     public boolean edificarCasa(int numCasilla){
          throw new UnsupportedOperationException("Sin implementar");
