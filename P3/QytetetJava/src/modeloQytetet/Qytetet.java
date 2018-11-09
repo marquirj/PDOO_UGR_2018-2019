@@ -23,7 +23,7 @@ public class Qytetet {
     private Sorpresa cartaActual;
     private Dado dado;
     private EstadoJuego estadoJuego;
-    private MetodoSalirCarcel metodoSalirCarcel;
+    //private MetodoSalirCarcel metodoSalirCarcel;
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private Qytetet(){}
 
@@ -159,10 +159,21 @@ public class Qytetet {
          throw new UnsupportedOperationException("Sin implementar");
     }
     public boolean comprarTituloPropiedad(){
-         
+         boolean comprado= jugadorActual.comprarTituloPropiedad();
+         if (comprado==true){
+              setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+         }
+         return comprado;
     }
     public boolean edificarCasa(int numCasilla){
-         throw new UnsupportedOperationException("Sin implementar");
+         Casilla casilla = tablero.obtenerCasillaNumero(numCasilla);
+         boolean edificada=false;
+         TituloPropiedad titulo = casilla.getTitulo();
+         edificada =jugadorActual.edificarCasa(titulo);
+         if(edificada){
+              setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+         }
+         return edificada;
     }
     public boolean edificarHotel(int numCasilla){
          throw new UnsupportedOperationException("Sin implementar");

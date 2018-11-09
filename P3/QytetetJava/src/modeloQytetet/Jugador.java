@@ -74,7 +74,14 @@ public class Jugador implements Comparable{
         throw new UnsupportedOperationException("Sin implementar");
     }
     boolean comprarTituloPropiedad( ){
-        throw new UnsupportedOperationException("Sin implementar");
+        int costeCompra=casillaActual.getCoste();
+        boolean comprado=false;
+        if(costeCompra<saldo){
+            TituloPropiedad titulo = casillaActual.asignarPropietario(this);
+            titulo.setPropietario(this);
+            comprado=true;
+        }
+        return comprado;
     }
     int cuantasCasasHotelesTengo(){
         int casas=0, hoteles=0;
@@ -94,7 +101,18 @@ public class Jugador implements Comparable{
         return carta;
     }
     boolean edificarCasa(TituloPropiedad titulo){
-        throw new UnsupportedOperationException("Sin implementar");
+        int numCasas=titulo.getNumCasas();
+        boolean edificada=false;
+        if(numCasas<4){
+            int costeEdificarCasa= titulo.getPrecioEdificar();
+            boolean tengoSaldo=tengoSaldo(costeEdificarCasa);
+            if(tengoSaldo){
+                titulo.edificarCasa();
+                modificarSaldo(-costeEdificarCasa);
+                edificada=true;
+            }
+        }
+        return edificada;
     }
     boolean edificarHotel(TituloPropiedad titulo){
         throw new UnsupportedOperationException("Sin implementar");
