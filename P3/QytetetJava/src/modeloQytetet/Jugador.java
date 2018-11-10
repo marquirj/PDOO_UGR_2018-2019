@@ -163,7 +163,10 @@ public class Jugador implements Comparable{
         }
         return aux;
     }
-    void pagarAlquiler(){}
+    void pagarAlquiler(){
+        int costeAlquiler =casillaActual.pagarAlquiler();
+        this.modificarSaldo(-costeAlquiler);
+    }
     void pagarImpuesto(){
         this.saldo = this.saldo - this.casillaActual.getCoste();
     }

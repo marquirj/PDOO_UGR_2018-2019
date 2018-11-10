@@ -47,7 +47,8 @@ public class Casilla {
         this.titulo=tit;
     }
     int pagarAlquiler(){
-        throw new UnsupportedOperationException("Sin implementar");
+       int costeAlquiler=titulo.calcularImporteAlquiler();
+       propietario.modificarSaldo(costeAlquiler);
     }
     boolean propietarioEncarcelado(){
         return this.titulo.propietarioEncarcelado();

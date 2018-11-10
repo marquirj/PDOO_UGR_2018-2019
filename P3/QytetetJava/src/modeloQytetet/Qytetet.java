@@ -222,7 +222,19 @@ public class Qytetet {
         return encarcelado;
     }
     public void jugar(){}
-    public void mover(int numCasillaDestino){}
+    public void mover(int numCasillaDestino){
+        Casilla casillaInicial =jugadorActual.getCasillaActual();
+        Casilla casillaFinal= tablero.obtenerCasillaNumero(numCasillaDestino);
+        jugadorActual.setCasillaActual(casillaFinal);
+        if(numCasillaDestino<casillaInicial.getNumeroCasilla()){
+            jugadorActual.modificarSaldo(SALDO_SALIDA);
+        }
+        if(casillaFinal.soyEdificable()){
+            actuarSiEnCasillaEdificable();
+        }else{
+            actuarSiEnCasillaNoEdificable();
+        }
+    }
     public Casilla obtenerCasillaJugadorActual(){
              throw new UnsupportedOperationException("Sin implementar");
     }

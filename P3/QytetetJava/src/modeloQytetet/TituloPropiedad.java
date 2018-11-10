@@ -80,7 +80,8 @@ public class TituloPropiedad {
         throw new UnsupportedOperationException("Sin implementar");
     }
     int calcularImporteAlquiler(){
-        throw new UnsupportedOperationException("Sin implementar");
+        int costeAlquiler=getAlquilerBase() + (int)(getNumCasas()*0.5 + getNumHoteles()*2);
+        return costeAlquiler;
         
     }
     int calcularPrecioVenta(){
@@ -98,7 +99,7 @@ public class TituloPropiedad {
         throw new UnsupportedOperationException("Sin implementar");
     }
     boolean propietarioEncarcelado(){
-        return this.propietario.isEncarcelado();
+        return this.propietario.getEncarcelado();
     }
     void setHipotecada(boolean hipotecada){}
 
