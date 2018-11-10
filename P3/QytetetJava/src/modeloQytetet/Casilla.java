@@ -48,7 +48,7 @@ public class Casilla {
     }
     int pagarAlquiler(){
        int costeAlquiler=titulo.calcularImporteAlquiler();
-       propietario.modificarSaldo(costeAlquiler);
+       //titulo.getPropietario().modificarSaldo(costeAlquiler);
     }
     boolean propietarioEncarcelado(){
         return this.titulo.propietarioEncarcelado();
