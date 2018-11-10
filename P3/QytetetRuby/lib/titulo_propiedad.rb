@@ -33,9 +33,7 @@ class TituloPropiedad
   def cancelarHipoteca
     raise NotImplementedError
   end
-  def cobrarAlquiler(alquiler_)
-    raise NotImplementedError
-  end
+ 
   def edificaCasa
     raise NotImplementedError
   end
