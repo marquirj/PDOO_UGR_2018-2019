@@ -38,7 +38,22 @@ class Qytetet
     @mazo<< Sorpresa.nuevo("Pagarás 10 a cada jugardor rival",-10,TipoSorpresa::PORJUGADOR)
   end
   def actuarSiEnCasillaEdificable
-    raise NotImplementedError
+    deboPagar = @jugadorActual.deboPagarAlquiler()
+    if(deboPagar)
+      @jugadorActual.pagarAlquiler()
+      if(@jugadorActual.saldo<=0)
+        @estadoJuego=EstadoJuego::ALGUNJUGADORENBANCARROTA
+      end
+    end
+    casilla =obtenerCasillaJugadorActual()
+    tengoPropietario=casilla.tengoPropietario()
+    if(@estadoJuego!= EstadoJuego::ALGUNJUGADORENBANCARROTA)
+      if(tengoPropietario)
+        @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+      else
+        @estadoJuego=EstadoJuego::JA_PUEDECOMPRAROGESTIONAR
+      end
+    end
   end
   def actuarSiEnCasillaNoEdificable
     raise NotImplementedError
