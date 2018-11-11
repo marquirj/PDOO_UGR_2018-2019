@@ -85,16 +85,24 @@ public class Qytetet {
         boolean deboPagar=jugadorActual.deboPagarAlquiler();
         if(deboPagar){
             jugadorActual.pagarAlquiler();
+            if(jugadorActual.getSaldo()<0){
+                setEstadoJuego(EstadoJuego.ALGUNJUGADORENBANCARROTA) ;
+            }
         }
         Casilla casilla=obtenerCasillaJugadorActual();
         boolean tengoPropietario=casilla.tengoPropietario();
-        if(tengoPropietario){
-            setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
-        }else{
+        if(estadoJuego!=EstadoJuego.ALGUNJUGADORENBANCARROTA){
+            
+            if(tengoPropietario){
+                setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+            }else{
+               setEstadoJuego(EstadoJuego.JA_PUEDECOMPRAROGESTIONAR);
+            }
         }
     }
     public void actuarSiEnCasillaNoEdificable(){
-        setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
+        
+         setEstadoJuego(EstadoJuego.JA_PUEDEGESTIONAR);
         Casilla casillaActual=jugadorActual.getCasillaActual();
         if(casillaActual.getTipo()==TipoCasilla.IMPUESTO){
             jugadorActual.pagarImpuesto();
@@ -106,7 +114,6 @@ public class Qytetet {
                 setEstadoJuego(EstadoJuego.JA_CONSORPRESA);
             }
         }
-        
         
 }
     public void aplicarSorpresa(){
