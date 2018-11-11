@@ -56,10 +56,23 @@ class Qytetet
     end
   end
   def actuarSiEnCasillaNoEdificable
-    raise NotImplementedError
+    @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    casillaActual = @jugadorActual.casillaActual
+    if(casillaActual.tipo==TipoCasilla::IMPUESTO)
+      @jugadorActual.pagarImpuesto()
+    else
+      if(casillaActual.tipo==TipoCasilla::JUEZ)
+        encarcelarJugador()
+      else
+        if(casillaActual.tipo==TipoCasilla::SORPRESA)
+          #cartaActual=remove(0)
+          @estadoJuego=EstadoJuego::JA_CONSORPRESA
+        end
+      end
+    end
   end
   def aplicarSorpresa
-    raise NotImplementedError
+    
   end
   def cancelarHipoteca(num_casilla_)
     raise NotImplementedError
