@@ -72,7 +72,49 @@ class Qytetet
     end
   end
   def aplicarSorpresa
-    
+    @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    if(@cartaActual.tipo==TipoSorpresa::SALIRCARCEL)
+      @jugadorActual.cartaLibertad=@cartaActual
+    else
+      @mazo<<@cartaActual
+      if(@cartaActual.tipo == TipoSorpresa::PAGARCOBRAR)
+        @jugadorActual.modificarSaldo(@cartaActual.valor)
+         if(@jugadorActual.saldo<0)
+           @estadoJuego=EstadoJuego::ALGUNJUGADORENBANCARROTA
+         end
+      end
+      if(@cartaActual.tipo ==TipoSorpresa::IRACASILLA)
+        valor=@cartaActual.valo
+        casillaCarcel=@tablero.esCasillaCarcel(valor);
+        if(casillaCarcel==true)
+          encarcelarJugador() 
+        else
+          mover(valor);
+        end
+      end
+      if(@cartaActual.tipo == TipoSorpresa::PORCASAHOTEL)
+        cantidad = @cartaActual.valor
+        numeroTotal = @jugadorActual.cuantasCasasHotelesTengo()
+        @jugadorActual.modificarSaldo((cantidad*numeroTotal))
+        if(@jugadorActual.saldo<0)
+          @estadoJuego=EstadoJuego::ALGUNJUGADORENBANCARROTA
+        end
+      end          
+      if(@cartaActual.tipo == TipoSorpresa::PORJUGADOR)
+        @jugadores.each do|jugador|
+           if(jugador!=@jugadorActual)
+              jugador.modificarSaldo(-@cartaActual.valor)
+           end
+           if(jugador.saldo<0)
+             @estadoJuego=EstadoJuego::ALGUNJUGADORENBANCARROTA
+           end 
+           if(@jugadorActual.saldo<0)
+               @estadoJuego=EstadoJuego::ALGUNJUGADORENBANCARROTA
+            end
+        end
+      end
+             
+    end
   end
   def cancelarHipoteca(num_casilla_)
     raise NotImplementedError
