@@ -204,7 +204,17 @@ class Qytetet
     raise NotImplementedError
   end
   def mover(casillaDestino_)
-    raise NotImplementedError
+    casillaInicial=@jugadorActual.casillaActual
+    casillaFinal=@tablero.obtenerNumeroCasilla(casillaDestino_)
+    @jugadorActual.casillaActual=casillaFinal
+    if(casillaDestino_<casillaInicial.numeroCasilla)
+      @jugadorActual.modificarSaldo(@@SALDO_INICIAL)
+    end
+    if(casillaFinal.soyEdificable())
+      actuarSiEnCasillaEdificable()
+    else
+      actuarSiEnCasillaNoEdificable()
+    end
   end
   def obtenerCasillaJugadorActual
     raise NotImplementedError
