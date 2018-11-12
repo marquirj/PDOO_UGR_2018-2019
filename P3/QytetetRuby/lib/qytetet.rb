@@ -136,10 +136,24 @@ class Qytetet
     return edificada
   end
   def edificarHotel(num_casilla_)
-    raise NotImplementedError
+   casilla=@tablero.obtenerCasillaNumero(num_casilla)
+    titulo=@casilla.titulo
+    edificada=@jugadorActual.edificarHotel(titulo)
+    if(edificada==true)
+      @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    end
+    return edificada
   end
   def encarcelarJugador
-    raise NotImplementedError
+    if(!@jugadorActual.tengoCartaLibertad())
+      casillaCarcel=@tablero.carcel
+      @jugadorActual.irACarcel(casillaCarcel)
+      @estadoJuego=EstadoJuego::JA_ENCARCELADO
+    else
+      carta=@jugadorActual.devolverCartaLibertad()
+      @mazo<<carta
+      @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    end
   end
   def getValorDado
     raise NotImplementedError

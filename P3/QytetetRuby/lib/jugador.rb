@@ -61,7 +61,18 @@ class Jugador
     end
   end
   def edificarHotel(titulo_)
-    raise NotImplementedError
+     num_Hoteles=titulo_.numHoteles
+    edificada=false
+    if(num_Hoteles<4)
+      costeEdificarHotel=titulo_.precioEdificar
+      tengoSaldo=tengoSaldo(costeEdificarHotel)
+      if(tengoSaldo)
+        titulo_.edificarHotel()
+        modificarSaldo(-costeEdificarHotel)
+        edificada=true
+      end
+      return edificada
+    end
   end
   def eliminarDeMisPropiedades(titulo_)
     raise NotImplementedError
@@ -81,7 +92,8 @@ class Jugador
     raise NotImplementedError
   end
   def irACarcel(casilla_)
-    raise NotImplementedError
+    @casillaActual=casilla_
+    @encarcelado=true
   end
   def modificarSaldo(cantidad_)
     @saldo = @saldo + cantidad_
