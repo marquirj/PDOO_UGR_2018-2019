@@ -44,7 +44,8 @@ class TituloPropiedad
     raise NotImplementedError
   end
   def pagarAlquiler
-    raise NotImplementedError
+    costeAlquiler=@propietario.calcularImporteAlquiler()
+    @modificarSaldo.modificarSaldo(costeAlquiler)
   end
   def propietarioEncarcelado
     return @propietario.encarcelado
