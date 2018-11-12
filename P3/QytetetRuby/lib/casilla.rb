@@ -25,7 +25,7 @@ class Casilla
    @titulo=jugador
   end
   def pagarAlquiler
-    raise NotImplementedError
+   costeAlquiler=@titulo.pagarAlquiler()
   end
   def propietarioEncarcelado
     return @titulo.propietarioEncarcelado
