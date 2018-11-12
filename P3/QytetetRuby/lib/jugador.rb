@@ -126,7 +126,11 @@ class Jugador
     @saldo = @saldo - @casillaActual.coste
   end
   def pagarLibertad(cantidad_)
-    raise NotImplementedError
+    tengoSaldo=tengoSaldo(cantidad_)
+    if(tengoSaldo)
+      @encarcelado=false
+      modificarSaldo(-cantidad)
+    end
   end
   def tengoCartaLibertad
     if @cartaLibertad !=nil

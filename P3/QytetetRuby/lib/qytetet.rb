@@ -181,7 +181,24 @@ class Qytetet
     @tablero=Tablero.new
   end
   def intentarSalirCarcel(metodo_)
-    raise NotImplementedError
+    if(metodo_==MetodoSalirCarcel::TIRANDODADO)
+      resultado=tirarDado()
+      if(resultado>=5)
+        @jugadorActual.encarcelado=false
+      end
+    else
+      if(metodo_==MetodoSalirCarcel::PAGANDOLIBERTAD)
+        @jugadorActual.pagarLibertad(@@PRECIO_LIBERTAD)
+        
+      end 
+    end
+    encarcelado=@jugadorActual.encarcelado
+    if(encarcelado)
+      @estadoJuego=EstadoJuego::JA_ENCARCELADO
+    else
+      @estadoJuego=EstadoJuego::JA_PREPARADO
+    end
+    return !encarcelado
   end
   def jugar
     raise NotImplementedError
