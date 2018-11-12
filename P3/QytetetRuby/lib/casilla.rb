@@ -22,7 +22,7 @@ class Casilla
   end
   
   def asignarPropietario(jugador)
-    raise NotImplementedError
+   @titulo=jugador
   end
   def pagarAlquiler
     raise NotImplementedError
