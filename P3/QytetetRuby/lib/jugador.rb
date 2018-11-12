@@ -47,7 +47,18 @@ class Jugador
     return carta
   end
   def edificarCasa(titulo_)
-    raise NotImplementedError
+    num_Casas=titulo_.numCasas
+    edificada=false
+    if(num_Casas<4)
+      costeEdificarCasa=titulo_.precioEdificar
+      tengoSaldo=tengoSaldo(costeEdificarCasa)
+      if(tengoSaldo)
+        titulo_.edificarCasa()
+        modificarSaldo(-costeEdificarCasa)
+        edificada=true
+      end
+      return edificada
+    end
   end
   def edificarHotel(titulo_)
     raise NotImplementedError

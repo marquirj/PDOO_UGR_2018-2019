@@ -127,7 +127,13 @@ class Qytetet
     return comprado
   end
   def edificarCasa(num_casilla_)
-    raise NotImplementedError
+    casilla=@tablero.obtenerCasillaNumero(num_casilla)
+    titulo=@casilla.titulo
+    edificada=@jugadorActual.edificarCasa(titulo)
+    if(edificada==true)
+      @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    end
+    return edificada
   end
   def edificarHotel(num_casilla_)
     raise NotImplementedError
