@@ -21,7 +21,14 @@ class Jugador
     raise NotImplementedError
   end
   def comprarTituloPropiedad
-    raise NotImplementedError
+    costeCompra=@casillaActual.coste
+    if(costeCompra<@saldo)
+      titulo=asignarPropietario(self)
+      @propiedades<<titulo
+      modificarSaldoCantidad(-costeCompra)
+      return true
+    end
+    return false
   end
   def cuantasCasasHotelesTengo
     casas = hoteles = 0

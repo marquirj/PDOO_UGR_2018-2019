@@ -120,7 +120,11 @@ class Qytetet
     raise NotImplementedError
   end
   def comprarTituloPropiedad
-    raise NotImplementedError
+    comprado=@jugadorActual.comprarTituloPropiedad()
+    if(comprado)
+      @estadoJuego=EstadoJuego::JA_PUEDEGESTIONAR
+    end
+    return comprado
   end
   def edificarCasa(num_casilla_)
     raise NotImplementedError
